@@ -39,3 +39,14 @@ export const CALENDAR_EVENT_LABELS: Record<string, string> = {
   plowing: "Sürüm",
   other: "Diğer",
 };
+
+export const FORUM_CATEGORIES: Record<string, string> = {
+  general: "Genel",
+  disease: "Hastalık & Zararlı",
+  fertilizing: "Gübreleme",
+  irrigation: "Sulama",
+  planting: "Ekim & Hasat",
+  equipment: "Ekipman",
+  market: "Pazar & Satış",
+  other: "Diğer",
+};
