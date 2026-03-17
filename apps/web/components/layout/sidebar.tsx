@@ -15,6 +15,7 @@ import {
   Leaf,
   MessagesSquare,
   BookOpen,
+  Shield,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -31,9 +32,16 @@ const navItems = [
   { href: "/dashboard/profile", label: "Profil", icon: User },
 ];
 
-export function Sidebar() {
+export function Sidebar({ isAdmin = false }: { isAdmin?: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  const allNavItems = isAdmin
+    ? [
+        ...navItems,
+        { href: "/dashboard/admin", label: "Admin Paneli", icon: Shield },
+      ]
+    : navItems;
 
   const sidebarContent = (
     <>
@@ -49,10 +57,11 @@ export function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 space-y-1 p-3">
-        {navItems.map((item) => {
+        {allNavItems.map((item) => {
           const isActive =
             pathname === item.href ||
             (item.href !== "/dashboard" && pathname.startsWith(item.href));
+          const isAdminItem = item.href === "/dashboard/admin";
           return (
             <Link
               key={item.href}
@@ -63,9 +72,17 @@ export function Sidebar() {
                 isActive
                   ? "bg-white/15 text-white shadow-sm"
                   : "text-white/60 hover:bg-white/8 hover:text-white/90",
+                isAdminItem && !isActive && "text-red-300/70 hover:text-red-200",
               )}
             >
-              <item.icon size={18} className={isActive ? "text-emerald-300" : ""} />
+              <item.icon
+                size={18}
+                className={cn(
+                  isActive ? "text-emerald-300" : "",
+                  isAdminItem && isActive && "text-red-300",
+                  isAdminItem && !isActive && "text-red-400/60",
+                )}
+              />
               {item.label}
             </Link>
           );

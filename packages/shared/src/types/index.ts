@@ -21,6 +21,7 @@ export interface Profile {
   district: string | null;
   plan_type: PlanType;
   avatar_url: string | null;
+  is_admin: boolean;
   created_at: string;
   updated_at: string;
 }

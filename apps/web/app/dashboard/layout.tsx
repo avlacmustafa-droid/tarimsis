@@ -27,10 +27,11 @@ export default async function DashboardLayout({
   const profile = data as Profile | null;
   const userName = profile?.full_name || user.email || "";
   const avatarUrl = profile?.avatar_url || null;
+  const isAdmin = profile?.is_admin || false;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
-      <Sidebar />
+      <Sidebar isAdmin={isAdmin} />
       <div className="lg:pl-64">
         <Header userName={userName} avatarUrl={avatarUrl} />
         <main className="p-4 sm:p-6 lg:p-8">{children}</main>
