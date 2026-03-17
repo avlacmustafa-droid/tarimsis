@@ -10,18 +10,35 @@ interface NewsItem {
   description: string;
 }
 
-// Google News RSS feeds (Türkçe tarım haberleri)
+// Google News RSS feeds — sadece çiftçileri ilgilendiren konular
 const GOOGLE_FEEDS: { query: string; category: string }[] = [
-  { query: "çiftçi destek tarımsal destekleme", category: "destek" },
-  { query: "tarım bakanlığı çiftçi duyuru", category: "duyuru" },
-  { query: "tarım ürün fiyat piyasa hal", category: "piyasa" },
-  { query: "tarım hasat ekim çiftçilik", category: "genel" },
+  { query: "\"çiftçi destek\" OR \"tarımsal destekleme\" OR \"mazot gübre desteği\"", category: "destek" },
+  { query: "\"tarım bakanlığı\" çiftçi OR üretici duyuru OR hibe OR IPARD", category: "duyuru" },
+  { query: "buğday OR arpa OR pamuk OR fındık OR zeytin fiyat çiftçi OR üretici", category: "piyasa" },
+  { query: "hasat OR ekim OR sulama OR sera OR hayvancılık çiftçi OR tarım", category: "genel" },
 ];
 
 // Anadolu Ajansı RSS feeds (doğrudan linkler)
 const AA_FEEDS: { url: string; category: string }[] = [
   { url: "https://www.aa.com.tr/tr/rss/default?cat=ekonomi", category: "genel" },
 ];
+
+// Çiftçileri ilgilendiren anahtar kelimeler
+const FARM_KEYWORDS = [
+  "tarım", "çiftçi", "hasat", "ekim", "gübre", "mazot", "destekleme",
+  "buğday", "arpa", "mısır", "pamuk", "fındık", "zeytin", "çay",
+  "süt üretici", "hayvancılık", "sera", "sulama", "tohum", "ipard",
+  "çks", "zirai", "ziraat", "üretici", "çeltik", "pirinç", "hibe",
+  "ayçiçeği", "şeker pancarı", "arıcılık", "organik tarım",
+  "traktör", "tarla", "mahsul", "ekin", "tohumluk", "mera",
+  "tarım kredi", "tarım bakanlığı", "tarımsal", "çiftlik",
+  "küçükbaş", "büyükbaş", "hayvan", "yem", "saman",
+  "bağcılık", "narenciye", "meyvecilik", "sebzecilik",
+];
+
+function isFarmRelated(text: string): boolean {
+  return FARM_KEYWORDS.some((kw) => text.includes(kw));
+}
 
 function parseGoogleRSSItems(xml: string, category: string): NewsItem[] {
   const items: NewsItem[] = [];
@@ -42,9 +59,13 @@ function parseGoogleRSSItems(xml: string, category: string): NewsItem[] {
     const descText = decodeHTMLEntities(descRaw).replace(/<[^>]*>/g, "").trim();
 
     if (title && link) {
+      // Tarımla alakalı olup olmadığını kontrol et
+      const combined = (title + " " + descText).toLowerCase();
+      if (!isFarmRelated(combined)) continue;
+
       items.push({
         title: decodeHTMLEntities(title),
-        link, // Google News linki - tıklanınca yeni sekmede açılacak
+        link,
         pubDate,
         source: decodeHTMLEntities(source),
         sourceUrl,
@@ -62,15 +83,6 @@ function parseAARSSItems(xml: string, defaultCategory: string): NewsItem[] {
   const itemRegex = /<item>([\s\S]*?)<\/item>/g;
   let match;
 
-  // Tarım ile ilgili anahtar kelimeler
-  const farmKeywords = [
-    "tarım", "çiftçi", "hasat", "ekim", "gübre", "mazot", "destek",
-    "buğday", "arpa", "mısır", "pamuk", "fındık", "zeytin", "çay",
-    "süt", "et", "hayvancılık", "sera", "sulama", "tohum", "ipard",
-    "çks", "toprak", "zirai", "ziraat", "üretici", "çeltik", "pirinç",
-    "ayçiçeği", "şeker pancarı", "tütün", "arıcılık", "organik",
-  ];
-
   while ((match = itemRegex.exec(xml)) !== null) {
     const itemXml = match[1];
 
@@ -82,9 +94,8 @@ function parseAARSSItems(xml: string, defaultCategory: string): NewsItem[] {
 
     // Sadece tarım ile ilgili haberleri al
     const combined = (title + " " + descText).toLowerCase();
-    const isFarmRelated = farmKeywords.some((kw) => combined.includes(kw));
 
-    if (title && link && isFarmRelated) {
+    if (title && link && isFarmRelated(combined)) {
       // Kategoriyi daha spesifik belirle
       let category = defaultCategory;
       if (combined.includes("destek") || combined.includes("hibe") || combined.includes("ipard") || combined.includes("mazot")) {
