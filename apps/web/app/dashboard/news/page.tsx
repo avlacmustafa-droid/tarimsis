@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import {
   Newspaper,
   Search,
   X,
-  ExternalLink,
   RefreshCw,
   HandCoins,
   Megaphone,
@@ -66,6 +66,7 @@ function timeAgo(dateStr: string): string {
 }
 
 export default function NewsPage() {
+  const router = useRouter();
   const [news, setNews] = useState<NewsItem[]>([]);
   const [categories, setCategories] = useState<NewsCategory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -249,13 +250,12 @@ export default function NewsPage() {
           {filtered.map((item, index) => {
             const meta = CATEGORY_META[item.category];
             const catLabel = categories.find((c) => c.id === item.category)?.label;
+            const articleUrl = `/dashboard/news/article?url=${encodeURIComponent(item.link)}&source=${encodeURIComponent(item.source)}&cat=${item.category}&date=${encodeURIComponent(item.pubDate)}`;
             return (
-              <a
+              <div
                 key={`${item.title}-${index}`}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group"
+                onClick={() => router.push(articleUrl)}
+                className="group cursor-pointer"
               >
                 <Card className="h-full border-0 shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:-translate-y-0.5">
                   <CardHeader className="pb-3">
@@ -266,7 +266,6 @@ export default function NewsPage() {
                         {meta?.icon}
                         {catLabel}
                       </span>
-                      <ExternalLink className="h-3.5 w-3.5 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                     </div>
                     <CardTitle className="mt-2 text-[15px] leading-snug line-clamp-3">
                       {item.title}
@@ -283,7 +282,7 @@ export default function NewsPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </a>
+              </div>
             );
           })}
         </div>
