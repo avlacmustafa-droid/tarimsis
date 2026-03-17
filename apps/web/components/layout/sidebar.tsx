@@ -16,6 +16,7 @@ import {
   MessagesSquare,
   BookOpen,
   Shield,
+  Newspaper,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -28,6 +29,7 @@ const navItems = [
   { href: "/dashboard/weather", label: "Hava Durumu", icon: CloudSun },
   { href: "/dashboard/ai-assistant", label: "AI Asistan", icon: Bot },
   { href: "/dashboard/forum", label: "Forum", icon: MessagesSquare },
+  { href: "/dashboard/news", label: "Haberler", icon: Newspaper },
   { href: "/dashboard/education", label: "Bilgi Bankası", icon: BookOpen },
   { href: "/dashboard/profile", label: "Profil", icon: User },
 ];

@@ -6,33 +6,28 @@ UPDATE profiles
 SET is_admin = true
 WHERE id = (SELECT id FROM auth.users WHERE email = 'avlacmustafa@gmail.com');
 
--- Admin kullanıcılar tüm profilleri görebilsin
+-- RLS döngüsünü kırmak için security definer fonksiyon
+CREATE OR REPLACE FUNCTION is_admin()
+RETURNS BOOLEAN AS $$
+  SELECT is_admin FROM profiles WHERE id = auth.uid();
+$$ LANGUAGE sql SECURITY DEFINER STABLE;
+
+-- Admin tüm profilleri görebilsin
 CREATE POLICY "Admins can view all profiles" ON profiles
-  FOR SELECT USING (
-    auth.uid() = id
-    OR EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.is_admin = true)
-  );
+  FOR SELECT USING (is_admin());
 
--- Admin kullanıcılar tüm profilleri güncelleyebilsin
+-- Admin tüm profilleri güncelleyebilsin
 CREATE POLICY "Admins can update all profiles" ON profiles
-  FOR UPDATE USING (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.is_admin = true)
-  );
+  FOR UPDATE USING (is_admin());
 
--- Admin kullanıcılar tüm forum konularını silebilsin
+-- Admin tüm forum konularını silebilsin
 CREATE POLICY "Admins can delete any topic" ON forum_topics
-  FOR DELETE USING (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.is_admin = true)
-  );
+  FOR DELETE USING (is_admin());
 
--- Admin kullanıcılar tüm forum konularını güncelleyebilsin
+-- Admin tüm forum konularını güncelleyebilsin
 CREATE POLICY "Admins can update any topic" ON forum_topics
-  FOR UPDATE USING (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.is_admin = true)
-  );
+  FOR UPDATE USING (is_admin());
 
--- Admin kullanıcılar tüm yanıtları silebilsin
+-- Admin tüm yanıtları silebilsin
 CREATE POLICY "Admins can delete any reply" ON forum_replies
-  FOR DELETE USING (
-    EXISTS (SELECT 1 FROM profiles p WHERE p.id = auth.uid() AND p.is_admin = true)
-  );
+  FOR DELETE USING (is_admin());
