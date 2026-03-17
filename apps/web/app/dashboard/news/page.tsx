@@ -12,6 +12,7 @@ import {
   TrendingUp,
   Wheat,
   Clock,
+  ExternalLink,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,7 @@ interface NewsItem {
   source: string;
   sourceUrl: string;
   category: string;
+  description: string;
 }
 
 interface NewsCategory {
@@ -250,11 +252,23 @@ export default function NewsPage() {
           {filtered.map((item, index) => {
             const meta = CATEGORY_META[item.category];
             const catLabel = categories.find((c) => c.id === item.category)?.label;
+            const isGoogleLink = item.link.includes("news.google.com");
             const articleUrl = `/dashboard/news/article?url=${encodeURIComponent(item.link)}&source=${encodeURIComponent(item.source)}&cat=${item.category}&date=${encodeURIComponent(item.pubDate)}`;
+
+            const handleClick = () => {
+              if (isGoogleLink) {
+                // Google News linklerini yeni sekmede aç
+                window.open(item.link, "_blank", "noopener,noreferrer");
+              } else {
+                // Doğrudan linkleri site içinde aç
+                router.push(articleUrl);
+              }
+            };
+
             return (
               <div
                 key={`${item.title}-${index}`}
-                onClick={() => router.push(articleUrl)}
+                onClick={handleClick}
                 className="group cursor-pointer"
               >
                 <Card className="h-full border-0 shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:-translate-y-0.5">
@@ -266,12 +280,20 @@ export default function NewsPage() {
                         {meta?.icon}
                         {catLabel}
                       </span>
+                      {isGoogleLink && (
+                        <ExternalLink className="h-3.5 w-3.5 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      )}
                     </div>
                     <CardTitle className="mt-2 text-[15px] leading-snug line-clamp-3">
                       {item.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
+                    {item.description && (
+                      <p className="mb-2 text-xs text-muted-foreground line-clamp-2">
+                        {item.description}
+                      </p>
+                    )}
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span className="font-medium truncate max-w-[60%]">
                         {item.source}

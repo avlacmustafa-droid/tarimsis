@@ -7,13 +7,19 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "url parametresi gerekli" }, { status: 400 });
   }
 
+  // Google News linkleri sunucu tarafında çözümlenemez
+  if (url.includes("news.google.com")) {
+    return NextResponse.json({ error: "google_news_link" }, { status: 400 });
+  }
+
   try {
-    // Google News linki genelde redirect eder, takip et
     const res = await fetch(url, {
       redirect: "follow",
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        Accept: "text/html,application/xhtml+xml",
+        "Accept-Language": "tr-TR,tr;q=0.9",
       },
       next: { revalidate: 3600 },
     });
@@ -25,15 +31,16 @@ export async function GET(request: NextRequest) {
     const html = await res.text();
     const finalUrl = res.url;
 
-    // HTML'den ana içeriği çıkar
     const content = extractArticleContent(html);
     const title = extractTitle(html);
     const image = extractMainImage(html, finalUrl);
+    const publishDate = extractPublishDate(html);
 
     return NextResponse.json({
       title,
       content,
       image,
+      publishDate,
       sourceUrl: finalUrl,
     });
   } catch (error) {
@@ -45,8 +52,8 @@ export async function GET(request: NextRequest) {
 }
 
 function extractTitle(html: string): string {
-  // og:title veya <title> tag'ından al
-  const ogTitle = html.match(/<meta\s+(?:property|name)="og:title"\s+content="([^"]*)"/)?.[1];
+  const ogTitle = html.match(/<meta\s+(?:property|name)="og:title"\s+content="([^"]*)"/)?.[1]
+    || html.match(/content="([^"]*)"\s+(?:property|name)="og:title"/)?.[1];
   if (ogTitle) return decodeHTMLEntities(ogTitle);
 
   const titleTag = html.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1];
@@ -56,7 +63,8 @@ function extractTitle(html: string): string {
 }
 
 function extractMainImage(html: string, baseUrl: string): string | null {
-  const ogImage = html.match(/<meta\s+(?:property|name)="og:image"\s+content="([^"]*)"/)?.[1];
+  const ogImage = html.match(/<meta\s+(?:property|name)="og:image"\s+content="([^"]*)"/)?.[1]
+    || html.match(/content="([^"]*)"\s+(?:property|name)="og:image"/)?.[1];
   if (ogImage) {
     if (ogImage.startsWith("http")) return ogImage;
     try {
@@ -65,6 +73,17 @@ function extractMainImage(html: string, baseUrl: string): string | null {
       return null;
     }
   }
+  return null;
+}
+
+function extractPublishDate(html: string): string | null {
+  const published = html.match(/<meta\s+(?:property|name)="article:published_time"\s+content="([^"]*)"/)?.[1]
+    || html.match(/content="([^"]*)"\s+(?:property|name)="article:published_time"/)?.[1];
+  if (published) return published;
+
+  const datePublished = html.match(/"datePublished"\s*:\s*"([^"]*)"/)?.[1];
+  if (datePublished) return datePublished;
+
   return null;
 }
 
@@ -93,19 +112,21 @@ function extractArticleContent(html: string): string[] {
 
   while ((match = pRegex.exec(cleaned)) !== null) {
     const text = stripTags(match[1]).trim();
-    // En az 40 karakter olan anlamlı paragrafları al
-    if (text.length >= 40) {
+    if (text.length >= 30) {
       paragraphs.push(text);
     }
   }
 
-  // Paragraf bulunamazsa h taglarından da topla
-  if (paragraphs.length === 0) {
-    const hRegex = /<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/gi;
-    while ((match = hRegex.exec(cleaned)) !== null) {
-      const text = stripTags(match[1]).trim();
-      if (text.length >= 20) {
-        paragraphs.push(text);
+  // Paragraf bulunamazsa div'lerden topla
+  if (paragraphs.length < 2) {
+    const divRegex = /<div[^>]*class="[^"]*(?:content|text|body|detail)[^"]*"[^>]*>([\s\S]*?)<\/div>/gi;
+    while ((match = divRegex.exec(cleaned)) !== null) {
+      const innerPs = match[1].match(/<p[^>]*>([\s\S]*?)<\/p>/gi);
+      if (innerPs) {
+        for (const p of innerPs) {
+          const text = stripTags(p).trim();
+          if (text.length >= 30) paragraphs.push(text);
+        }
       }
     }
   }

@@ -32,6 +32,14 @@ export default function ArticlePage() {
 
   useEffect(() => {
     if (!url) return;
+
+    // Google News linkleri sunucuda çözümlenemez, direkt yeni sekmede aç
+    if (url.includes("news.google.com")) {
+      window.open(url, "_blank", "noopener,noreferrer");
+      router.push("/dashboard/news");
+      return;
+    }
+
     setLoading(true);
     setError(false);
 
@@ -46,7 +54,7 @@ export default function ArticlePage() {
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, [url]);
+  }, [url, router]);
 
   const categoryLabels: Record<string, string> = {
     destek: "Destekler & Hibeler",
