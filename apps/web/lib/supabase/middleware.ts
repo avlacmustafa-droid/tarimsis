@@ -40,6 +40,7 @@ export async function updateSession(request: NextRequest) {
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/auth") &&
+    !request.nextUrl.pathname.startsWith("/api/news") &&
     request.nextUrl.pathname !== "/" &&
     request.nextUrl.pathname !== "/offline"
   ) {
