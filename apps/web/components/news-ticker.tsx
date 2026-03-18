@@ -48,7 +48,7 @@ export function NewsTicker() {
           <div
             className="flex whitespace-nowrap hover:[animation-play-state:paused]"
             style={{
-              animation: "ticker 60s linear infinite",
+              animation: "ticker 25s linear infinite",
             }}
           >
             <span className="inline-block px-4 text-sm font-medium text-green-800 dark:text-green-200">
