@@ -19,8 +19,8 @@ export function NewsTicker() {
       .then((data) => {
         if (data.news?.length) {
           setNews(
-            data.news.slice(0, 8).map((item: NewsItem) => ({
-              title: item.title.length > 60 ? item.title.slice(0, 60) + "…" : item.title,
+            data.news.slice(0, 20).map((item: NewsItem) => ({
+              title: item.title,
               link: item.link,
               source: item.source,
             }))
@@ -48,7 +48,7 @@ export function NewsTicker() {
           <div
             className="flex whitespace-nowrap hover:[animation-play-state:paused]"
             style={{
-              animation: "ticker 15s linear infinite",
+              animation: "ticker 30s linear infinite",
             }}
           >
             <span className="inline-block px-4 text-sm font-medium text-green-800 dark:text-green-200">
