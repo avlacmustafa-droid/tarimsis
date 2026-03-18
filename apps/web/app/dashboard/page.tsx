@@ -26,6 +26,7 @@ import type { Database } from "@tarimsis/supabase";
 import { WeatherWidget } from "./weather-widget";
 import { MonthlyChart } from "./monthly-chart";
 import { RecentTransactions } from "./recent-transactions";
+import { NewsTicker } from "@/components/news-ticker";
 
 type Transaction = Database["public"]["Tables"]["transactions"]["Row"];
 type CalendarEvent = Database["public"]["Tables"]["calendar_events"]["Row"];
@@ -258,6 +259,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6 lg:space-y-8">
+      {/* Haber Bandı */}
+      <NewsTicker />
+
       {/* Karşılama */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
