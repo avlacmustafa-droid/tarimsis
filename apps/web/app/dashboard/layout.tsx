@@ -30,11 +30,11 @@ export default async function DashboardLayout({
   const isAdmin = profile?.is_admin || false;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
+    <div className="min-h-screen bg-background">
       <Sidebar isAdmin={isAdmin} />
-      <div className="lg:pl-64">
+      <div className="lg:pl-[260px]">
         <Header userName={userName} avatarUrl={avatarUrl} />
-        <main className="p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="bg-grid p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );

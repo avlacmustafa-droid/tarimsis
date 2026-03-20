@@ -17,6 +17,7 @@ import {
   MessagesSquare,
   CheckCircle2,
   MessageCircle,
+  ScanSearch,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -51,29 +52,43 @@ const quickActions = [
     href: "/dashboard/fields/new",
     label: "Arazi Ekle",
     icon: MapPin,
-    gradient: "from-emerald-500 to-green-600",
+    color: "text-emerald-600 dark:text-emerald-400",
     bg: "bg-emerald-50 dark:bg-emerald-950/30",
   },
   {
     href: "/dashboard/finance/new",
     label: "İşlem Ekle",
     icon: Wallet,
-    gradient: "from-blue-500 to-indigo-600",
+    color: "text-blue-600 dark:text-blue-400",
     bg: "bg-blue-50 dark:bg-blue-950/30",
   },
   {
     href: "/dashboard/calendar/new",
     label: "Etkinlik Ekle",
     icon: CalendarDays,
-    gradient: "from-orange-500 to-amber-600",
-    bg: "bg-orange-50 dark:bg-orange-950/30",
+    color: "text-amber-600 dark:text-amber-400",
+    bg: "bg-amber-50 dark:bg-amber-950/30",
   },
   {
     href: "/dashboard/ai-assistant",
     label: "AI'ya Sor",
     icon: Bot,
-    gradient: "from-purple-500 to-violet-600",
-    bg: "bg-purple-50 dark:bg-purple-950/30",
+    color: "text-violet-600 dark:text-violet-400",
+    bg: "bg-violet-50 dark:bg-violet-950/30",
+  },
+  {
+    href: "/dashboard/diagnose",
+    label: "Teşhis Et",
+    icon: ScanSearch,
+    color: "text-rose-600 dark:text-rose-400",
+    bg: "bg-rose-50 dark:bg-rose-950/30",
+  },
+  {
+    href: "/dashboard/weather",
+    label: "Hava Durumu",
+    icon: TrendingUp,
+    color: "text-cyan-600 dark:text-cyan-400",
+    bg: "bg-cyan-50 dark:bg-cyan-950/30",
   },
 ];
 
@@ -220,7 +235,8 @@ export default async function DashboardPage() {
       value: fieldCount.toString(),
       subtitle: totalAreaHectar > 0 ? `${totalAreaHectar.toFixed(1)} hektar alan` : "arazi kaydı",
       icon: Layers,
-      iconBg: "bg-emerald-500",
+      accent: "bg-emerald-500",
+      borderColor: "border-t-emerald-500",
       trend: null,
       valueColor: "",
       href: "/dashboard/fields",
@@ -230,7 +246,8 @@ export default async function DashboardPage() {
       value: formatCurrency(monthlyIncome),
       subtitle: "geçen aya göre",
       icon: TrendingUp,
-      iconBg: "bg-green-500",
+      accent: "bg-green-500",
+      borderColor: "border-t-green-500",
       trend: incomeTrend !== 0 ? { value: incomeTrend, positive: incomeTrend > 0 } : null,
       valueColor: "text-green-600 dark:text-green-400",
       href: "/dashboard/finance",
@@ -240,9 +257,10 @@ export default async function DashboardPage() {
       value: formatCurrency(monthlyExpense),
       subtitle: "geçen aya göre",
       icon: TrendingDown,
-      iconBg: "bg-red-500",
+      accent: "bg-amber-500",
+      borderColor: "border-t-amber-500",
       trend: expenseTrend !== 0 ? { value: expenseTrend, positive: false } : null,
-      valueColor: "text-red-500 dark:text-red-400",
+      valueColor: "text-amber-600 dark:text-amber-400",
       href: "/dashboard/finance",
     },
     {
@@ -250,7 +268,8 @@ export default async function DashboardPage() {
       value: formatCurrency(netBalance),
       subtitle: "bu ay",
       icon: BarChart3,
-      iconBg: netBalance >= 0 ? "bg-blue-500" : "bg-red-500",
+      accent: netBalance >= 0 ? "bg-blue-500" : "bg-red-500",
+      borderColor: netBalance >= 0 ? "border-t-blue-500" : "border-t-red-500",
       trend: null,
       valueColor: netBalance >= 0 ? "text-blue-600 dark:text-blue-400" : "text-red-500 dark:text-red-400",
       href: "/dashboard/finance",
@@ -265,15 +284,15 @@ export default async function DashboardPage() {
       {/* Karşılama */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            {getGreeting()}{firstName ? `, ${firstName}` : ""} 👋
+          <h1 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+            {getGreeting()}{firstName ? `, ${firstName}` : ""}
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground sm:text-base">
-            İşletmenizin güncel durumuna göz atın
+          <p className="mt-1 text-sm text-muted-foreground">
+            Tarımsal işletmenizin güncel durumuna göz atın
           </p>
         </div>
         <Link href="/dashboard/fields/new">
-          <Button size="sm" className="gap-1.5 shadow-sm">
+          <Button size="sm" className="gap-1.5 rounded-lg shadow-sm">
             <Plus size={16} />
             Yeni Arazi
           </Button>
@@ -286,25 +305,25 @@ export default async function DashboardPage() {
           {activeReminders.map((r) => (
             <div
               key={r.id}
-              className="flex items-center gap-3 rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 px-4 py-3 dark:border-amber-900 dark:from-amber-950/30 dark:to-orange-950/20"
+              className="flex items-center gap-3 rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 px-4 py-3 dark:border-amber-900/50 dark:from-amber-950/20 dark:to-orange-950/10"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50">
-                <Bell className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/40">
+                <Bell className="h-4 w-4 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+                <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">
                   {r.title}
                 </p>
-                <p className="text-xs text-amber-600 dark:text-amber-400">
+                <p className="text-xs text-amber-600/80 dark:text-amber-400/70">
                   {new Date(r.event_date).toLocaleDateString("tr-TR", {
                     day: "numeric",
                     month: "long",
                   })}{" "}
-                  tarihli etkinlik için hatırlatıcı
+                  tarihli etkinlik
                 </p>
               </div>
               <Link href="/dashboard/calendar">
-                <Button variant="outline" size="sm" className="shrink-0 text-xs">
+                <Button variant="outline" size="sm" className="shrink-0 rounded-lg text-xs">
                   Takvime Git
                 </Button>
               </Link>
@@ -317,18 +336,18 @@ export default async function DashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {summaryCards.map((card) => (
           <Link key={card.title} href={card.href} className="group">
-            <Card className="relative overflow-hidden border-0 bg-card shadow-sm transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-0.5">
+            <Card className={`card-glow relative overflow-hidden border-0 border-t-[3px] ${card.borderColor} bg-card shadow-sm`}>
               <CardContent className="p-5">
                 <div className="flex items-start justify-between">
-                  <div className="space-y-3">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  <div className="space-y-2">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                       {card.title}
                     </p>
-                    <p className={`text-2xl font-bold tabular-nums ${card.valueColor}`}>
+                    <p className={`text-2xl font-extrabold tabular-nums ${card.valueColor}`}>
                       {card.value}
                     </p>
                   </div>
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${card.iconBg} shadow-sm`}>
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${card.accent} shadow-sm`}>
                     <card.icon className="h-5 w-5 text-white" />
                   </div>
                 </div>
@@ -336,23 +355,23 @@ export default async function DashboardPage() {
                   {card.trend ? (
                     <>
                       <span
-                        className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-semibold ${
+                        className={`inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 text-[11px] font-bold ${
                           card.trend.positive
                             ? "bg-green-100 text-green-700 dark:bg-green-950/40 dark:text-green-400"
                             : "bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-400"
                         }`}
                       >
                         {card.trend.positive ? (
-                          <ArrowUpRight size={12} />
+                          <ArrowUpRight size={11} />
                         ) : (
-                          <ArrowDownRight size={12} />
+                          <ArrowDownRight size={11} />
                         )}
                         %{Math.abs(card.trend.value)}
                       </span>
-                      <span className="text-xs text-muted-foreground">{card.subtitle}</span>
+                      <span className="text-[11px] text-muted-foreground">{card.subtitle}</span>
                     </>
                   ) : (
-                    <span className="text-xs text-muted-foreground">{card.subtitle}</span>
+                    <span className="text-[11px] text-muted-foreground">{card.subtitle}</span>
                   )}
                 </div>
               </CardContent>
@@ -361,12 +380,26 @@ export default async function DashboardPage() {
         ))}
       </div>
 
+      {/* Hızlı İşlemler */}
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+        {quickActions.map((action) => (
+          <Link key={action.href} href={action.href}>
+            <div className={`group flex flex-col items-center gap-2.5 rounded-xl ${action.bg} p-4 transition-all duration-200 hover:scale-[1.03] hover:shadow-md cursor-pointer`}>
+              <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-white/80 dark:bg-white/10 shadow-sm transition-transform group-hover:scale-110`}>
+                <action.icon className={`h-5 w-5 ${action.color}`} />
+              </div>
+              <span className="text-[11px] font-semibold text-foreground/70 text-center leading-tight">{action.label}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+
       {/* Grafik & Son İşlemler */}
       <div className="grid gap-4 lg:grid-cols-5">
-        <Card className="border-0 shadow-sm lg:col-span-3">
+        <Card className="card-glow border-0 shadow-sm lg:col-span-3">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2.5 text-base font-semibold">
+              <CardTitle className="flex items-center gap-2.5 text-sm font-bold">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500 shadow-sm">
                   <BarChart3 className="h-4 w-4 text-white" />
                 </div>
@@ -379,10 +412,10 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm lg:col-span-2">
+        <Card className="card-glow border-0 shadow-sm lg:col-span-2">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2.5 text-base font-semibold">
+              <CardTitle className="flex items-center gap-2.5 text-sm font-bold">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500 shadow-sm">
                   <Wallet className="h-4 w-4 text-white" />
                 </div>
@@ -408,11 +441,11 @@ export default async function DashboardPage() {
         <WeatherWidget />
 
         {/* Yaklaşan Etkinlikler */}
-        <Card className="border-0 shadow-sm lg:col-span-1">
+        <Card className="card-glow border-0 shadow-sm lg:col-span-1">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2.5 text-base font-semibold">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500 shadow-sm">
+              <CardTitle className="flex items-center gap-2.5 text-sm font-bold">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500 shadow-sm">
                   <CalendarDays className="h-4 w-4 text-white" />
                 </div>
                 Yaklaşan Etkinlikler
@@ -435,7 +468,7 @@ export default async function DashboardPage() {
                   Yaklaşan etkinlik yok
                 </p>
                 <Link href="/dashboard/calendar/new">
-                  <Button size="sm" variant="outline" className="mt-3 gap-1.5">
+                  <Button size="sm" variant="outline" className="mt-3 gap-1.5 rounded-lg">
                     <Plus size={14} />
                     Etkinlik Ekle
                   </Button>
@@ -481,7 +514,7 @@ export default async function DashboardPage() {
                         </div>
                       </div>
                       <span
-                        className={`rounded-md px-2 py-1 text-[11px] font-medium ${
+                        className={`rounded-md px-2 py-1 text-[11px] font-semibold ${
                           diffDays <= 0
                             ? "bg-primary/10 text-primary"
                             : diffDays <= 2
@@ -499,111 +532,15 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Hızlı İşlemler */}
-        <Card className="border-0 shadow-sm">
+        {/* Hızlı Bilgi */}
+        <Card className="card-glow border-0 shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-semibold">Hızlı İşlemler</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-3">
-              {quickActions.map((action) => (
-                <Link key={action.href} href={action.href}>
-                  <div className={`group/action flex flex-col items-center gap-3 rounded-xl ${action.bg} p-5 transition-all duration-200 hover:scale-[1.02] hover:shadow-md cursor-pointer`}>
-                    <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${action.gradient} shadow-sm transition-transform duration-200 group-hover/action:scale-110`}>
-                      <action.icon className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="text-xs font-semibold text-foreground/80">{action.label}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Forum & Araziler */}
-      <div className="grid gap-4 lg:grid-cols-2">
-        {/* Son Forum Konuları */}
-        <Card className="border-0 shadow-sm">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2.5 text-base font-semibold">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500 shadow-sm">
-                  <MessagesSquare className="h-4 w-4 text-white" />
-                </div>
-                Son Forum Konuları
-              </CardTitle>
-              <Link href="/dashboard/forum">
-                <Button variant="ghost" size="sm" className="h-7 text-xs text-muted-foreground hover:text-foreground">
-                  Tümü
-                  <ArrowRight size={12} className="ml-1" />
-                </Button>
-              </Link>
-            </div>
-          </CardHeader>
-          <CardContent>
-            {recentForumTopics.length === 0 ? (
-              <div className="flex flex-col items-center justify-center rounded-xl bg-muted/30 py-8">
-                <MessagesSquare className="h-8 w-8 text-muted-foreground" />
-                <p className="mt-2 text-sm text-muted-foreground">Henüz konu yok</p>
-                <Link href="/dashboard/forum/new">
-                  <Button size="sm" variant="outline" className="mt-3 gap-1.5">
-                    <Plus size={14} />
-                    Konu Aç
-                  </Button>
-                </Link>
+            <CardTitle className="flex items-center gap-2.5 text-sm font-bold">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500 shadow-sm">
+                <MapPin className="h-4 w-4 text-white" />
               </div>
-            ) : (
-              <div className="space-y-1">
-                {recentForumTopics.map((topic) => {
-                  const timeAgo = (() => {
-                    const diff = Math.floor(
-                      (now.getTime() - new Date(topic.created_at).getTime()) / 1000,
-                    );
-                    if (diff < 3600) return `${Math.floor(diff / 60)} dk`;
-                    if (diff < 86400) return `${Math.floor(diff / 3600)} sa`;
-                    return `${Math.floor(diff / 86400)} gün`;
-                  })();
-                  return (
-                    <Link key={topic.id} href={`/dashboard/forum/${topic.id}`}>
-                      <div className="flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-muted/50">
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2">
-                            <p className="text-sm font-medium truncate">{topic.title}</p>
-                            {topic.is_solved && (
-                              <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-green-600" />
-                            )}
-                          </div>
-                          <p className="text-xs text-muted-foreground">
-                            {FORUM_CATEGORIES[topic.category] || topic.category} • {timeAgo} önce
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Arazilerim Özeti */}
-        <Card className="border-0 shadow-sm">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2.5 text-base font-semibold">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500 shadow-sm">
-                  <MapPin className="h-4 w-4 text-white" />
-                </div>
-                Arazilerim
-              </CardTitle>
-              <Link href="/dashboard/fields">
-                <Button variant="ghost" size="sm" className="h-7 text-xs text-muted-foreground hover:text-foreground">
-                  Tümü
-                  <ArrowRight size={12} className="ml-1" />
-                </Button>
-              </Link>
-            </div>
+              Arazilerim
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {recentFields.length === 0 ? (
@@ -611,7 +548,7 @@ export default async function DashboardPage() {
                 <MapPin className="h-8 w-8 text-muted-foreground" />
                 <p className="mt-2 text-sm text-muted-foreground">Henüz arazi eklenmedi</p>
                 <Link href="/dashboard/fields/new">
-                  <Button size="sm" variant="outline" className="mt-3 gap-1.5">
+                  <Button size="sm" variant="outline" className="mt-3 gap-1.5 rounded-lg">
                     <Plus size={14} />
                     Arazi Ekle
                   </Button>
@@ -636,7 +573,7 @@ export default async function DashboardPage() {
                         </div>
                       </div>
                       {field.current_crop && (
-                        <span className="rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
+                        <span className="rounded-md bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">
                           {field.current_crop}
                         </span>
                       )}
@@ -648,6 +585,70 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Forum */}
+      <Card className="card-glow border-0 shadow-sm">
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2.5 text-sm font-bold">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500 shadow-sm">
+                <MessagesSquare className="h-4 w-4 text-white" />
+              </div>
+              Son Forum Konuları
+            </CardTitle>
+            <Link href="/dashboard/forum">
+              <Button variant="ghost" size="sm" className="h-7 text-xs text-muted-foreground hover:text-foreground">
+                Tümü
+                <ArrowRight size={12} className="ml-1" />
+              </Button>
+            </Link>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {recentForumTopics.length === 0 ? (
+            <div className="flex flex-col items-center justify-center rounded-xl bg-muted/30 py-8">
+              <MessagesSquare className="h-8 w-8 text-muted-foreground" />
+              <p className="mt-2 text-sm text-muted-foreground">Henüz konu yok</p>
+              <Link href="/dashboard/forum/new">
+                <Button size="sm" variant="outline" className="mt-3 gap-1.5 rounded-lg">
+                  <Plus size={14} />
+                  Konu Aç
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="grid gap-1 sm:grid-cols-2 lg:grid-cols-3">
+              {recentForumTopics.map((topic) => {
+                const timeAgo = (() => {
+                  const diff = Math.floor(
+                    (now.getTime() - new Date(topic.created_at).getTime()) / 1000,
+                  );
+                  if (diff < 3600) return `${Math.floor(diff / 60)} dk`;
+                  if (diff < 86400) return `${Math.floor(diff / 3600)} sa`;
+                  return `${Math.floor(diff / 86400)} gün`;
+                })();
+                return (
+                  <Link key={topic.id} href={`/dashboard/forum/${topic.id}`}>
+                    <div className="flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-muted/50">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-medium truncate">{topic.title}</p>
+                          {topic.is_solved && (
+                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-green-600" />
+                          )}
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          {FORUM_CATEGORIES[topic.category] || topic.category} • {timeAgo} önce
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }
