@@ -12,6 +12,7 @@ export interface PesticideInfo {
   dozaj: string;
   uygulama_sekli: string;
   hasat_arasi_sure: string; // gün
+  nesil: "yeni" | "klasik"; // yeni = son 5-10 yıl, klasik = geleneksel
 }
 
 export interface DiseaseInfo {
@@ -48,19 +49,54 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
           "Hastalıklı bitki artıklarının toplanıp yakılması",
         ],
         kimyasal_mucadele: [
+          // YENİ NESİL
           {
-            aktif_madde: "Metalaksil-M + Mankozeb",
-            ticari_isimler: ["Ridomil Gold MZ 68 WG"],
-            dozaj: "250 g / 100 L su",
+            aktif_madde: "Mandipropamid",
+            ticari_isimler: ["Revus 250 SC"],
+            dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "14 gün",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
           },
           {
-            aktif_madde: "Mankozeb",
-            ticari_isimler: ["Dithane M-45", "Penncozeb 80 WP"],
-            dozaj: "200 g / 100 L su",
+            aktif_madde: "Mandipropamid + Difenokonazol",
+            ticari_isimler: ["Revus Top"],
+            dozaj: "60 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Ametoktradin + Dimetomorf",
+            ticari_isimler: ["Orvego"],
+            dozaj: "80 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Amisulbrom",
+            ticari_isimler: ["Leimay 20 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fluopikolid + Propamokarb",
+            ticari_isimler: ["Infinito 687.5 SC"],
+            dozaj: "120-160 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Siyazofamid",
+            ticari_isimler: ["Ranman Top"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Famoksadon + Simoksanil",
@@ -68,6 +104,24 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "40 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          // KLASİK
+          {
+            aktif_madde: "Metalaksil-M + Mankozeb",
+            ticari_isimler: ["Ridomil Gold MZ 68 WG"],
+            dozaj: "250 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
+          },
+          {
+            aktif_madde: "Mankozeb",
+            ticari_isimler: ["Dithane M-45", "Penncozeb 80 WP"],
+            dozaj: "200 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Bakır oksiklorür",
@@ -75,13 +129,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "300-500 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Metiram",
-            ticari_isimler: ["Polyram DF"],
-            dozaj: "200 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -107,11 +155,44 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Flupiram + Trifloksistrobin",
+            ticari_isimler: ["Luna Sensation 500 SC"],
+            dozaj: "40 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Azoksistrobin + Difenokonazol",
+            ticari_isimler: ["Amistar Top 325 SC"],
+            dozaj: "75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Boskaliid + Piraklostrobin",
+            ticari_isimler: ["Signum WG"],
+            dozaj: "100 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Pikoksistrobin",
+            ticari_isimler: ["Oranis 250 EC"],
+            dozaj: "50-60 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Azoksistrobin",
             ticari_isimler: ["Quadris", "Amistar"],
             dozaj: "75-100 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Difenokonazol",
@@ -119,13 +200,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Klorotalonil",
-            ticari_isimler: ["Daconil 720 SC", "Bravo 720 SC"],
-            dozaj: "200 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Mankozeb",
@@ -133,6 +208,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -156,11 +232,36 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Fluksapiroksad + Difenokonazol",
+            ticari_isimler: ["Sercadis Plus"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Metrafenon",
+            ticari_isimler: ["Vivando 500 SC"],
+            dozaj: "20 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Trifloksistrobin + Tebukonazol",
+            ticari_isimler: ["Nativo 75 WG"],
+            dozaj: "20 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Kükürt (toz veya sıvı)",
             ticari_isimler: ["Tiovit Jet", "Kumulus DF"],
             dozaj: "300-500 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması (sıcaklık 35°C altında)",
             hasat_arasi_sure: "1 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Penkonazol",
@@ -168,13 +269,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Miklobutanil",
-            ticari_isimler: ["Systhane 24 E"],
-            dozaj: "30 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -197,25 +292,28 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Abamektin",
-            ticari_isimler: ["Vertimec 1.8 EC", "Abamectin 18 EC"],
-            dozaj: "50 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
-          },
-          {
-            aktif_madde: "Spiromesifen",
-            ticari_isimler: ["Oberon 240 SC"],
-            dozaj: "50 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
-          },
-          {
             aktif_madde: "Siyantraniliprol",
-            ticari_isimler: ["Cyazypyr", "Exirel"],
+            ticari_isimler: ["Exirel 10 SE", "Benevia 10 OD"],
             dozaj: "50-75 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Spirotetramat",
+            ticari_isimler: ["Movento 150 OD"],
+            dozaj: "50-75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (iki yönlü sistemik)",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Abamektin",
+            ticari_isimler: ["Vertimec 1.8 EC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -245,6 +343,31 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Spirotetramat",
+            ticari_isimler: ["Movento 150 OD"],
+            dozaj: "50-75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Siyantraniliprol",
+            ticari_isimler: ["Benevia 10 OD"],
+            dozaj: "75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Flupyradifuron",
+            ticari_isimler: ["Sivanto Prime 200 SL"],
+            dozaj: "50-75 ml / 100 L su",
+            uygulama_sekli: "Yaprak veya damla sulama ile",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Pyriproksfen",
@@ -252,6 +375,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Asetamiprid",
@@ -259,6 +383,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "30 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -283,18 +408,44 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Abamektin",
-            ticari_isimler: ["Vertimec 1.8 EC"],
-            dozaj: "50 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması (yaprak altına iyi temas)",
-            hasat_arasi_sure: "3 gün",
-          },
-          {
             aktif_madde: "Spirodiklofen",
             ticari_isimler: ["Envidor 240 SC"],
             dozaj: "40 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Spiromesifen",
+            ticari_isimler: ["Oberon 240 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (yumurta + larva etkili)",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Bifenazat",
+            ticari_isimler: ["Floramite 240 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Etoksazol",
+            ticari_isimler: ["Borneo 110 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (yumurta + larva akarisit)",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Abamektin",
+            ticari_isimler: ["Vertimec 1.8 EC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (yaprak altına iyi temas)",
+            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Heksitiazoks",
@@ -302,6 +453,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "50 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -331,6 +483,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "200-300 g / 100 L su",
             uygulama_sekli: "Toprak drench + yaprak uygulaması (koruyucu)",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -364,6 +517,23 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "20 ml / 100 L su (Coragen), 8 g / 100 L su (Altacor)",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Siyantraniliprol",
+            ticari_isimler: ["Exirel 10 SE", "Benevia 10 OD"],
+            dozaj: "75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Emamektin benzoat",
+            ticari_isimler: ["Affirm 095 SG", "Proclaim Fit"],
+            dozaj: "50 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Spinosad",
@@ -371,6 +541,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "30-50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Indoksakarb",
@@ -378,13 +549,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
-          },
-          {
-            aktif_madde: "Emamektin benzoat",
-            ticari_isimler: ["Affirm 095 SG", "Proclaim 05 SG"],
-            dozaj: "50 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -415,11 +580,36 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Fluksapiroksad + Difenokonazol",
+            ticari_isimler: ["Sercadis Plus"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Trifloksistrobin + Tebukonazol",
+            ticari_isimler: ["Nativo 75 WG"],
+            dozaj: "20 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Azoksistrobin + Difenokonazol",
+            ticari_isimler: ["Amistar Top 325 SC"],
+            dozaj: "75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Kükürt",
             ticari_isimler: ["Tiovit Jet", "Kumulus DF"],
             dozaj: "300-500 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "1 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Penkonazol",
@@ -427,13 +617,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Azoksistrobin",
-            ticari_isimler: ["Quadris", "Amistar"],
-            dozaj: "75 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -456,18 +640,28 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Azoksistrobin + Difenokonazol",
+            ticari_isimler: ["Amistar Top 325 SC"],
+            dozaj: "75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Boskaliid + Piraklostrobin",
+            ticari_isimler: ["Signum WG"],
+            dozaj: "100 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Mankozeb",
             ticari_isimler: ["Dithane M-45"],
             dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Azoksistrobin + Difenokonazol",
-            ticari_isimler: ["Amistar Top"],
-            dozaj: "75 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -490,11 +684,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Azoksistrobin",
-            ticari_isimler: ["Quadris"],
+            aktif_madde: "Azoksistrobin + Difenokonazol",
+            ticari_isimler: ["Amistar Top 325 SC"],
             dozaj: "75 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fludioksonil + Siprodinil",
+            ticari_isimler: ["Switch 62.5 WG"],
+            dozaj: "80 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Mankozeb",
@@ -502,13 +705,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Prochloraz",
-            ticari_isimler: ["Sportak 45 EW"],
-            dozaj: "100 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -533,25 +730,44 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Flonikamid",
+            ticari_isimler: ["Teppeki 50 WG"],
+            dozaj: "14 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (arılara güvenli)",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Spirotetramat",
+            ticari_isimler: ["Movento 150 OD"],
+            dozaj: "50-75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (iki yönlü sistemik)",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Flupyradifuron",
+            ticari_isimler: ["Sivanto Prime 200 SL"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak veya damla sulama",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Asetamiprid",
             ticari_isimler: ["Mospilan 20 SP"],
             dozaj: "30 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
-          },
-          {
-            aktif_madde: "Flonikamid",
-            ticari_isimler: ["Teppeki 50 WG"],
-            dozaj: "14 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Pirimikarb",
             ticari_isimler: ["Pirimor 50 WG"],
             dozaj: "50 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması (arılara daha az zararlı)",
+            uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -581,11 +797,36 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Mandipropamid",
+            ticari_isimler: ["Revus 250 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Ametoktradin + Dimetomorf",
+            ticari_isimler: ["Orvego"],
+            dozaj: "80 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fluopikolid + Propamokarb",
+            ticari_isimler: ["Infinito 687.5 SC"],
+            dozaj: "120-160 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Metalaksil-M + Mankozeb",
             ticari_isimler: ["Ridomil Gold MZ 68 WG"],
             dozaj: "250 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "5 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Fosetil-Al",
@@ -593,13 +834,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
-          },
-          {
-            aktif_madde: "Dimetomorf + Mankozeb",
-            ticari_isimler: ["Acrobat MZ"],
-            dozaj: "200 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -623,11 +858,36 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Trifloksistrobin + Tebukonazol",
+            ticari_isimler: ["Nativo 75 WG"],
+            dozaj: "20 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fluksapiroksad + Difenokonazol",
+            ticari_isimler: ["Sercadis Plus"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Metrafenon",
+            ticari_isimler: ["Vivando 500 SC"],
+            dozaj: "20 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Kükürt",
             ticari_isimler: ["Tiovit Jet"],
             dozaj: "300 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "1 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Penkonazol",
@@ -635,13 +895,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
-          },
-          {
-            aktif_madde: "Trifloksistrobin + Tebukonazol",
-            ticari_isimler: ["Nativo 75 WG"],
-            dozaj: "20 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -673,11 +927,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Fluopyram",
+            ticari_isimler: ["Velum Prime 400 SC"],
+            dozaj: "25-50 ml / da (damla sulama ile)",
+            uygulama_sekli: "Damla sulama ile toprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Tiofanat-metil",
             ticari_isimler: ["Topsin M 70 WP"],
             dozaj: "100 g / 100 L su",
             uygulama_sekli: "Toprak drench",
             hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -701,18 +964,36 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Abamektin",
-            ticari_isimler: ["Vertimec 1.8 EC"],
-            dozaj: "50 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
-          },
-          {
             aktif_madde: "Spirodiklofen",
             ticari_isimler: ["Envidor 240 SC"],
             dozaj: "40 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Bifenazat",
+            ticari_isimler: ["Floramite 240 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Etoksazol",
+            ticari_isimler: ["Borneo 110 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (yumurta + larva)",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Abamektin",
+            ticari_isimler: ["Vertimec 1.8 EC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -742,11 +1023,36 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Fluksapiroksad + Difenokonazol",
+            ticari_isimler: ["Sercadis Plus"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Trifloksistrobin + Tebukonazol",
+            ticari_isimler: ["Nativo 75 WG"],
+            dozaj: "20 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Metrafenon",
+            ticari_isimler: ["Vivando 500 SC"],
+            dozaj: "20 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Kükürt",
             ticari_isimler: ["Tiovit Jet"],
             dozaj: "300-500 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "1 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Miklobutanil",
@@ -754,13 +1060,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "30 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
-          },
-          {
-            aktif_madde: "Trifloksistrobin",
-            ticari_isimler: ["Flint 50 WG"],
-            dozaj: "15 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -785,11 +1085,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Fluopyram",
+            ticari_isimler: ["Velum Prime 400 SC"],
+            dozaj: "25-50 ml / da (damla sulama ile)",
+            uygulama_sekli: "Damla sulama ile toprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Tiofanat-metil",
             ticari_isimler: ["Topsin M 70 WP"],
             dozaj: "100 g / 100 L su",
             uygulama_sekli: "Toprak drench (kök bölgesine)",
             hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -819,11 +1128,36 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Protiokonazol + Trifloksistrobin",
+            ticari_isimler: ["Fox Xpro"],
+            dozaj: "75 ml / da",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "35 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Protiokonazol + Tebukonazol",
+            ticari_isimler: ["Prosaro 250 EC"],
+            dozaj: "75-100 ml / da",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "35 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fluksapiroksad + Epoksikonazol",
+            ticari_isimler: ["Adexar 125 EC"],
+            dozaj: "100-120 ml / da",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "35 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Tebukonazol",
             ticari_isimler: ["Folicur 25 WG", "Orius 25 EW"],
             dozaj: "100 ml / da (dekar)",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "35 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Propikonazol",
@@ -831,20 +1165,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "50 ml / da",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "35 gün",
-          },
-          {
-            aktif_madde: "Epoksionazol + Tiofanat-metil",
-            ticari_isimler: ["Yamato"],
-            dozaj: "100 ml / da",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "35 gün",
-          },
-          {
-            aktif_madde: "Triadimefon",
-            ticari_isimler: ["Bayleton 25 WP"],
-            dozaj: "50 g / da",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "35 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -869,11 +1190,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Klorantraniliprol + Lambda-sihalotrin",
+            ticari_isimler: ["Ampligo 150 ZC"],
+            dozaj: "20 ml / da",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Lambda-sihalotrin",
-            ticari_isimler: ["Karate 5 EC", "Lambda 5 EC"],
+            ticari_isimler: ["Karate Zeon", "Karate 5 EC"],
             dozaj: "20 ml / da",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "21 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Deltametrin",
@@ -881,13 +1211,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 ml / da",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
-          },
-          {
-            aktif_madde: "Alfa-sipermetrin",
-            ticari_isimler: ["Fastac 100 EC"],
-            dozaj: "10-15 ml / da",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -914,6 +1238,15 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "75-100 ml / da",
             uygulama_sekli: "Yaprak uygulaması (bayrak yaprağı döneminde)",
             hasat_arasi_sure: "35 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fluksapiroksad + Piraklostrobin",
+            ticari_isimler: ["Priaxor EC"],
+            dozaj: "80-100 ml / da",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "35 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Azoksistrobin + Propikonazol",
@@ -921,6 +1254,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "100 ml / da",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "35 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -956,20 +1290,23 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "15-20 ml / da",
             uygulama_sekli: "Yaprak uygulaması (yumurtadan çıkış döneminde)",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Lambda-sihalotrin",
-            ticari_isimler: ["Karate 5 EC"],
-            dozaj: "30 ml / da",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Emamektin benzoat",
-            ticari_isimler: ["Affirm 095 SG"],
+            ticari_isimler: ["Affirm 095 SG", "Proclaim Fit"],
             dozaj: "40 g / da",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Lambda-sihalotrin",
+            ticari_isimler: ["Karate Zeon"],
+            dozaj: "30 ml / da",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -999,25 +1336,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Kükürt",
-            ticari_isimler: ["Tiovit Jet", "Kumulus DF"],
-            dozaj: "400-600 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "1 gün",
-          },
-          {
-            aktif_madde: "Penkonazol",
-            ticari_isimler: ["Topas 100 EC"],
-            dozaj: "25 ml / 100 L su",
+            aktif_madde: "Metrafenon",
+            ticari_isimler: ["Vivando 500 SC"],
+            dozaj: "20 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
-            aktif_madde: "Trifloksistrobin",
-            ticari_isimler: ["Flint 50 WG"],
-            dozaj: "15-20 g / 100 L su",
+            aktif_madde: "Fluksapiroksad + Difenokonazol",
+            ticari_isimler: ["Sercadis Plus"],
+            dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Spiroksamin",
@@ -1025,6 +1357,23 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "80 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "21 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Kükürt",
+            ticari_isimler: ["Tiovit Jet", "Kumulus DF"],
+            dozaj: "400-600 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "1 gün",
+            nesil: "klasik",
+          },
+          {
+            aktif_madde: "Penkonazol",
+            ticari_isimler: ["Topas 100 EC"],
+            dozaj: "25 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1047,25 +1396,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Bakır sülfat + kireç (Bordo Bulamacı)",
-            ticari_isimler: ["Bordo Bulamacı %1-2"],
-            dozaj: "%1-2'lik karışım",
-            uygulama_sekli: "Yaprak uygulaması (göz kabarması öncesi)",
+            aktif_madde: "Mandipropamid",
+            ticari_isimler: ["Revus 250 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
-            aktif_madde: "Metalaksil-M + Mankozeb",
-            ticari_isimler: ["Ridomil Gold MZ"],
-            dozaj: "250 g / 100 L su",
+            aktif_madde: "Ametoktradin + Dimetomorf",
+            ticari_isimler: ["Orvego"],
+            dozaj: "80 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "21 gün",
-          },
-          {
-            aktif_madde: "Fosetil-Al",
-            ticari_isimler: ["Aliette 80 WG"],
-            dozaj: "200 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "21 gün",
+            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Famoksadon + Simoksanil",
@@ -1073,6 +1417,23 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "40 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "21 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Bakır sülfat + kireç (Bordo Bulamacı)",
+            ticari_isimler: ["Bordo Bulamacı %1-2"],
+            dozaj: "%1-2'lik karışım",
+            uygulama_sekli: "Yaprak uygulaması (göz kabarması öncesi)",
+            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
+          },
+          {
+            aktif_madde: "Metalaksil-M + Mankozeb",
+            ticari_isimler: ["Ridomil Gold MZ"],
+            dozaj: "250 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "21 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1097,11 +1458,28 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Klorantraniliprol",
+            ticari_isimler: ["Coragen 20 SC"],
+            dozaj: "20 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Emamektin benzoat",
+            ticari_isimler: ["Affirm 095 SG"],
+            dozaj: "40 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Spinosad",
             ticari_isimler: ["Laser 240 SC"],
             dozaj: "30-40 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Indoksakarb",
@@ -1109,13 +1487,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "30 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
-          },
-          {
-            aktif_madde: "Klorantraniliprol",
-            ticari_isimler: ["Coragen 20 SC"],
-            dozaj: "20 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1147,18 +1519,12 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Dimethoate",
-            ticari_isimler: ["Rogor 40 EC", "Danadim 40 EC"],
-            dozaj: "100 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması (tam alan veya çekici zehirli yem)",
-            hasat_arasi_sure: "28 gün",
-          },
-          {
             aktif_madde: "Spinosad (yem sprey)",
             ticari_isimler: ["GF-120 Fruit Fly Bait"],
             dozaj: "1 L / ha (şerit uygulama)",
             uygulama_sekli: "Çekici zehirli yem olarak şerit uygulama",
             hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Lambda-sihalotrin",
@@ -1166,6 +1532,15 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "30 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Dimethoate",
+            ticari_isimler: ["Rogor 40 EC", "Danadim 40 EC"],
+            dozaj: "100 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (tam alan veya çekici zehirli yem)",
+            hasat_arasi_sure: "28 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1188,18 +1563,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Bakır oksiklorür",
-            ticari_isimler: ["Cupravit 50 WP"],
-            dozaj: "300-500 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması (sonbahar + ilkbahar)",
-            hasat_arasi_sure: "14 gün",
-          },
-          {
             aktif_madde: "Bakır hidroksit",
             ticari_isimler: ["Kocide 2000", "Champion WP"],
             dozaj: "200-300 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Bakır oksiklorür",
+            ticari_isimler: ["Cupravit 50 WP"],
+            dozaj: "300-500 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması (sonbahar + ilkbahar)",
+            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1230,18 +1607,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Kaptan",
-            ticari_isimler: ["Captan 50 WP", "Merpan 80 WG"],
+            aktif_madde: "Flupiram + Trifloksistrobin",
+            ticari_isimler: ["Luna Sensation 500 SC"],
+            dozaj: "30-40 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Ditianon + Pirimetanil",
+            ticari_isimler: ["Maccani"],
             dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
-          },
-          {
-            aktif_madde: "Ditianon",
-            ticari_isimler: ["Delan 700 WG"],
-            dozaj: "50 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Difenokonazol",
@@ -1249,13 +1628,15 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "20 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
-            aktif_madde: "Trifloksistrobin + Kaptan",
-            ticari_isimler: ["Flint Plus"],
-            dozaj: "150 g / 100 L su",
+            aktif_madde: "Kaptan",
+            ticari_isimler: ["Captan 50 WP", "Merpan 80 WG"],
+            dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Mankozeb",
@@ -1263,6 +1644,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1286,11 +1668,28 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Fluksapiroksad + Difenokonazol",
+            ticari_isimler: ["Sercadis Plus"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Trifloksistrobin + Tebukonazol",
+            ticari_isimler: ["Nativo 75 WG"],
+            dozaj: "20 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Kükürt",
             ticari_isimler: ["Tiovit Jet"],
             dozaj: "400 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "1 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Penkonazol",
@@ -1298,13 +1697,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
-          },
-          {
-            aktif_madde: "Bupirimat",
-            ticari_isimler: ["Nimrod 25 EC"],
-            dozaj: "40-60 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1335,13 +1728,15 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "17.5-20 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması (yumurtadan çıkış döneminde)",
             hasat_arasi_sure: "14 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Emamektin benzoat",
-            ticari_isimler: ["Affirm 095 SG"],
+            ticari_isimler: ["Affirm 095 SG", "Proclaim Fit"],
             dozaj: "200-250 g / ha",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Indoksakarb",
@@ -1349,6 +1744,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "30 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1380,18 +1776,12 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Fenheksamid",
-            ticari_isimler: ["Teldor 500 SC"],
-            dozaj: "100 ml / 100 L su",
+            aktif_madde: "Flupiram + Trifloksistrobin",
+            ticari_isimler: ["Luna Sensation 500 SC"],
+            dozaj: "40 ml / 100 L su",
             uygulama_sekli: "Yaprak/çiçek uygulaması",
             hasat_arasi_sure: "1 gün",
-          },
-          {
-            aktif_madde: "Boskalid + Piraklostrobin",
-            ticari_isimler: ["Signum WG"],
-            dozaj: "150 g / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Siprodinil + Fludiyoksanil",
@@ -1399,6 +1789,23 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "80-100 g / 100 L su",
             uygulama_sekli: "Yaprak/çiçek uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fenheksamid",
+            ticari_isimler: ["Teldor 500 SC"],
+            dozaj: "100 ml / 100 L su",
+            uygulama_sekli: "Yaprak/çiçek uygulaması",
+            hasat_arasi_sure: "1 gün",
+            nesil: "klasik",
+          },
+          {
+            aktif_madde: "Boskalid + Piraklostrobin",
+            ticari_isimler: ["Signum WG"],
+            dozaj: "150 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1423,11 +1830,20 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Miklobutanil",
-            ticari_isimler: ["Systhane 24 E"],
-            dozaj: "30 ml / 100 L su",
+            aktif_madde: "Fluksapiroksad + Difenokonazol",
+            ticari_isimler: ["Sercadis Plus"],
+            dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Trifloksistrobin + Tebukonazol",
+            ticari_isimler: ["Nativo 75 WG"],
+            dozaj: "20 g / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Penkonazol",
@@ -1435,6 +1851,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1464,11 +1881,44 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Mandipropamid",
+            ticari_isimler: ["Revus 250 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Amisulbrom",
+            ticari_isimler: ["Leimay 20 SC"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Siyazofamid",
+            ticari_isimler: ["Ranman Top"],
+            dozaj: "50 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Fluopikolid + Propamokarb",
+            ticari_isimler: ["Infinito 687.5 SC"],
+            dozaj: "120-160 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Metalaksil-M + Mankozeb",
             ticari_isimler: ["Ridomil Gold MZ 68 WG"],
             dozaj: "250 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Mankozeb",
@@ -1476,20 +1926,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "200 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Siyazofamid",
-            ticari_isimler: ["Ranman 400 SC"],
-            dozaj: "20 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
-          },
-          {
-            aktif_madde: "Propamokarb + Fenamidone",
-            ticari_isimler: ["Consento 450 SC"],
-            dozaj: "200 ml / 100 L su",
-            uygulama_sekli: "Yaprak uygulaması",
-            hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1520,6 +1957,15 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "20 ml / da",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Siyantraniliprol",
+            ticari_isimler: ["Exirel 10 SE"],
+            dozaj: "50-75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Spinosad",
@@ -1527,6 +1973,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "30-50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Asetamiprid",
@@ -1534,6 +1981,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "25 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "7 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1565,11 +2013,12 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
-            aktif_madde: "Metalaksil-M",
-            ticari_isimler: ["Ridomil Gold SL"],
-            dozaj: "25 ml / 10 L su (drench)",
-            uygulama_sekli: "Toprak drench (fide kök bölgesine)",
-            hasat_arasi_sure: "14 gün",
+            aktif_madde: "Fluopyram",
+            ticari_isimler: ["Velum Prime 400 SC"],
+            dozaj: "25-50 ml / da (damla sulama ile)",
+            uygulama_sekli: "Damla sulama ile toprak uygulaması",
+            hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Propamokarb",
@@ -1577,6 +2026,15 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "150-250 ml / 100 L su",
             uygulama_sekli: "Toprak drench",
             hasat_arasi_sure: "7 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Metalaksil-M",
+            ticari_isimler: ["Ridomil Gold SL"],
+            dozaj: "25 ml / 10 L su (drench)",
+            uygulama_sekli: "Toprak drench (fide kök bölgesine)",
+            hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Tiofanat-metil",
@@ -1584,6 +2042,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "100 g / 100 L su",
             uygulama_sekli: "Toprak drench",
             hasat_arasi_sure: "14 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1610,11 +2069,28 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
         ],
         kimyasal_mucadele: [
           {
+            aktif_madde: "Siyantraniliprol",
+            ticari_isimler: ["Exirel 10 SE", "Benevia 10 OD"],
+            dozaj: "50-75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "1 gün",
+            nesil: "yeni",
+          },
+          {
             aktif_madde: "Spinosad",
             ticari_isimler: ["Laser 240 SC"],
             dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
+          },
+          {
+            aktif_madde: "Spirotetramat",
+            ticari_isimler: ["Movento 150 OD"],
+            dozaj: "50-75 ml / 100 L su",
+            uygulama_sekli: "Yaprak uygulaması",
+            hasat_arasi_sure: "3 gün",
+            nesil: "yeni",
           },
           {
             aktif_madde: "Abamektin",
@@ -1622,6 +2098,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "50 ml / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
           {
             aktif_madde: "Formetanat",
@@ -1629,6 +2106,7 @@ export const PESTICIDE_DATABASE: CropDiseases[] = [
             dozaj: "100 g / 100 L su",
             uygulama_sekli: "Yaprak uygulaması",
             hasat_arasi_sure: "3 gün",
+            nesil: "klasik",
           },
         ],
         kulturel_onlemler: [
@@ -1809,14 +2287,32 @@ function formatDiseaseData(plantName: string, disease: DiseaseInfo): string {
   text += `📌 Etmen: ${disease.etmen}\n`;
   text += `\nBelirtiler:\n${disease.belirtiler.map((b) => `- ${b}`).join("\n")}\n`;
   text += `\nBiyolojik Mücadele:\n${disease.biyolojik_mucadele.map((b) => `- ${b}`).join("\n")}\n`;
-  text += `\nRuhsatlı Kimyasal İlaçlar:\n`;
-  for (const ilac of disease.kimyasal_mucadele) {
-    text += `- Aktif Madde: ${ilac.aktif_madde}\n`;
-    text += `  Ticari İsimler: ${ilac.ticari_isimler.join(", ")}\n`;
-    text += `  Dozaj: ${ilac.dozaj}\n`;
-    text += `  Uygulama: ${ilac.uygulama_sekli}\n`;
-    text += `  Hasat Arası Süre: ${ilac.hasat_arasi_sure}\n`;
+
+  const yeniIlaclar = disease.kimyasal_mucadele.filter((i) => i.nesil === "yeni");
+  const klasikIlaclar = disease.kimyasal_mucadele.filter((i) => i.nesil === "klasik");
+
+  if (yeniIlaclar.length > 0) {
+    text += `\n🆕 Güncel/Yeni Nesil Ruhsatlı İlaçlar (ÖNCELİKLE BUNLARI ÖNER):\n`;
+    for (const ilac of yeniIlaclar) {
+      text += `- Aktif Madde: ${ilac.aktif_madde}\n`;
+      text += `  Ticari İsimler: ${ilac.ticari_isimler.join(", ")}\n`;
+      text += `  Dozaj: ${ilac.dozaj}\n`;
+      text += `  Uygulama: ${ilac.uygulama_sekli}\n`;
+      text += `  Hasat Arası Süre: ${ilac.hasat_arasi_sure}\n`;
+    }
   }
+
+  if (klasikIlaclar.length > 0) {
+    text += `\n📦 Klasik/Geleneksel İlaçlar (alternatif olarak önerilebilir):\n`;
+    for (const ilac of klasikIlaclar) {
+      text += `- Aktif Madde: ${ilac.aktif_madde}\n`;
+      text += `  Ticari İsimler: ${ilac.ticari_isimler.join(", ")}\n`;
+      text += `  Dozaj: ${ilac.dozaj}\n`;
+      text += `  Uygulama: ${ilac.uygulama_sekli}\n`;
+      text += `  Hasat Arası Süre: ${ilac.hasat_arasi_sure}\n`;
+    }
+  }
+
   text += `\nKültürel Önlemler:\n${disease.kulturel_onlemler.map((k) => `- ${k}`).join("\n")}`;
   return text;
 }
