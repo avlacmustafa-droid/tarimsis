@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/lib/supabase/server";
+import { findRelevantPesticideData } from "@/lib/pesticide-database";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -15,7 +16,7 @@ function getMediaType(
   return "image/jpeg";
 }
 
-const DIAGNOSIS_PROMPT = `Sen uzman bir ziraat mühendisisin. Çiftçilerin gönderdiği bitki fotoğraflarını analiz edip hastalık ve zararlı teşhisi yapıyorsun.
+const BASE_DIAGNOSIS_PROMPT = `Sen uzman bir ziraat mühendisisin. Çiftçilerin gönderdiği bitki fotoğraflarını analiz edip hastalık ve zararlı teşhisi yapıyorsun.
 
 Fotoğrafı analiz et ve aşağıdaki formatta Türkçe yanıt ver:
 
@@ -30,7 +31,7 @@ Hafif / Orta / Şiddetli olarak derecelendir.
 
 ## Tedavi Önerileri
 - Biyolojik mücadele: Önce doğal ve biyolojik çözümleri öner
-- Kimyasal mücadele: SADECE Türkiye'de ruhsatlı ilaçları öner (aşağıdaki kurallara uy)
+- Kimyasal mücadele: SADECE sana sağlanan veritabanındaki ruhsatlı ilaçları öner. Veritabanında bilgi yoksa KENDİN İLAÇ ÖNERİSİ YAPMA, ziraat mühendisine yönlendir.
 - Kültürel önlemler: Yapılması gerekenler
 
 ## Önleme
@@ -40,12 +41,12 @@ Gelecekte bu sorunun tekrarlanmaması için alınacak önlemler.
 Eğer teşhisten emin değilsen, mutlaka ziraat mühendisine veya il/ilçe tarım müdürlüğüne başvurmayı öner.
 
 İLAÇ ÖNERİSİ KURALLARI (ÇOK ÖNEMLİ):
+- Sana veritabanından ruhsatlı ilaç bilgileri sağlanacak. İlaç önerisi yaparken MUTLAKA bu veritabanındaki bilgileri kullan.
+- Veritabanında olmayan hastalık/bitki kombinasyonu için KENDİN İLAÇ İSMİ UYDURMA. "Veritabanımızda bu hastalık için spesifik bilgi bulunmamaktadır. İl/ilçe tarım müdürlüğünüzden veya ziraat mühendisinden bilgi almanızı öneririz." de.
 - SADECE Türkiye'de T.C. Tarım ve Orman Bakanlığı tarafından ruhsatlı olan bitki koruma ürünlerini öner
-- İlaç önerirken mutlaka aktif madde adını belirt (örn: Bakır oksiklorür, Azoksistrobin, Deltametrin, Mankozeb)
-- Türkiye'de yaygın kullanılan ticari isimleri tercih et (örn: Bordo Bulamacı, Topsin M, Karate, Decis, Ridomil Gold, Score, Tilt, Folicur, Champion, Equation Pro, Antracol, Dithane)
-- Her ilaç önerisinin sonuna şu notu ekle: "⚠️ Bu ilacın ruhsat durumunu bku.tarimorman.gov.tr adresinden kontrol edin."
+- İlaç önerirken mutlaka aktif madde adını, ticari ismini, dozajını ve hasat arası süresini belirt
+- Her ilaç önerisinin sonuna şu notu ekle: "⚠️ Bu bilgiler referans amaçlıdır. İlacın güncel ruhsat durumunu bku.tarimorman.gov.tr adresinden kontrol edin ve uygulama öncesi bir ziraat mühendisine danışın."
 - Türkiye'de yasaklı veya kısıtlı aktif maddeleri (Klorpirifos, Fipronil, bazı Neonikotinoidler) KESİNLİKLE önerme
-- Emin olmadığın ilaçlarda "İl/ilçe tarım müdürlüğünüzden ruhsatlı ilaç bilgisi alın" de
 - Biyolojik mücadeleyi her zaman kimyasal mücadeleden önce öner
 
 Genel Kurallar:
@@ -91,23 +92,23 @@ export async function POST(request: Request) {
     },
   ];
 
-  if (description) {
-    content.push({
-      type: "text",
-      text: `Çiftçinin ek açıklaması: ${description}`,
-    });
-  } else {
-    content.push({
-      type: "text",
-      text: "Bu bitkinin fotoğrafını analiz et ve teşhis yap.",
-    });
-  }
+  const userText = description
+    ? `Çiftçinin ek açıklaması: ${description}`
+    : "Bu bitkinin fotoğrafını analiz et ve teşhis yap.";
+
+  content.push({ type: "text", text: userText });
+
+  // Kullanıcı açıklamasından ilgili ilaç veritabanı bilgilerini bul
+  const pesticideContext = description
+    ? findRelevantPesticideData(description)
+    : "";
+  const systemPrompt = BASE_DIAGNOSIS_PROMPT + pesticideContext;
 
   try {
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 2048,
-      system: DIAGNOSIS_PROMPT,
+      system: systemPrompt,
       messages: [{ role: "user", content }],
     });
 
